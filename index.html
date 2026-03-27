@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOODIE · Recipes & restaurants</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-layout">
+    <!-- ========== SIDEBAR ========== -->
+    <aside class="sidebar">
+        <div class="logo">🍔 FOODIE</div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li onclick="showMain()" class="active"><i class="fas fa-home"></i> Home</li>
+                <li onclick="showWallet()"><i class="fas fa-wallet"></i> Wallet</li>
+                <li onclick="showNotifications()"><i class="fas fa-bell"></i> Notification</li>
+                <li onclick="showContact()"><i class="fas fa-envelope"></i> Contact Us</li>
+                <li onclick="showSettings()"><i class="fas fa-sliders-h"></i> Setting</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="main-content">
+        <!-- All sections go here, only one visible at a time -->
+
+        <!-- HOME SECTION -->
+        <section id="homeMain">
+            <div class="top-user-area">
+
+             <!-- Cart -->
+                <div class="cart-box" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount">0</span>
+                </div>
+
+                <!-- Profile -->
+                <div class="profile-box" onclick="toggleProfile()">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="username">Login</span>
+                </div>
+
+            </div>
+            <div id="loginModal" class="modal">
+
+                <div class="modal-content">
+                    <h2>Login</h2>
+
+                    <input type="text" id="loginName" placeholder="Enter your name">
+                    <input type="text" id="loginEmail" placeholder="Enter your Email">
+                    <input type="text" id="loginPassword" placeholder="Enter your password">
+                    <button onclick="loginUser()">Login</button>
+
+                </div>
+
+            </div>
+            <div id="cartPanel" class="cart-panel">
+
+                <h3>Your Orders</h3>
+
+                <div id="cartItems"></div>
+
+                <p>Total: $<span id="totalPrice">0</span></p>
+
+                <button onclick="checkout()">Checkout</button>
+
+            </div>
+            <div class="hero">
+                <h1>Welcome to FOODIE</h1>
+                <p>Discover delicious recipes and the best restaurants around you!</p>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="What you want to eat?">
+                    <button onclick="searchFood()">Search</button>
+                </div>
+
+            </div>
+
+            <h2 class="section-title">Menus Categories</h2>
+            <div class="category-grid">
+                <div class="category-card" onclick="showBurgerRestaurants()">
+                    <i class="fas fa-hamburger"></i> Burger
+                </div>
+                <div class="category-card" onclick="showPizzaRestaurants()">
+                    <i class="fas fa-pizza-slice"></i> Pizza
+                </div>
+                <div class="category-card" onclick="showIcecreamRestaurants()">
+                    <i class="fas fa-ice-cream"></i> Ice Cream
+                </div>
+                <div class="category-card" onclick="showCoffeeRestaurants()">
+                    <i class="fas fa-mug-hot"></i> Coffee
+                </div>
+                <div class="category-card" onclick="showSeafoodRestaurants()">
+                    <i class="fas fa-fish"></i> Seafood
+                </div>
+                <div class="category-card" onclick="showHealthyRestaurants()">
+                    <i class="fas fa-leaf"></i> Healthy
+                </div>
+            </div>
+            <div>
+            <h2 class="section-title">All Restaurants</h2>
+            <div id="allRestaurants" class="restaurant-list"></div>
+                
+            </div>
+        </section>
+                <!-- ========== BURGER ========== -->
+        <section id="burgerRestaurants" style="display:none;" class="section-card">
+            <h2><i class="fas fa-hamburger"></i> Burger Restaurants</h2>
+            <div class="restaurant-list">
+                <div class="restaurant-card" onclick="openBurgerMenu('burger_king')">
+                    <h3>Burger King</h3>
+                    <img src="Images/king_burger.jpg" alt="Burger King">
+                </div>
+                <div class="restaurant-card" onclick="openBurgerMenu('burger_KFC')">
+                    <h3>Burger KFC</h3>
+                    <img src="Images/KFC.jpg" alt="KFC burger">
+                </div>
+                <div class="restaurant-card" onclick="openBurgerMenu('texas_chicken')">
+                    <h3>Burger King</h3>
+                    <img src="https://i.pinimg.com/1200x/15/58/f9/1558f9690dfaaa3471660d53f3e44456.jpg" alt="Texas Chicken">
+                </div>
+                <div class="restaurant-card" onclick="openBurgerMenu('burger_bio')">
+                    <h3>Burger KFC</h3>
+                    <img src="https://i.pinimg.com/1200x/96/bf/84/96bf847a8ef87ffd6ffcfa2a90004211.jpg" alt="Burger Bio">
+                </div>
+            </div>
+            <button onclick="backToMain()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <section id="burgerFoodList" style="display:none;" class="section-card">
+            <h2><i class="fas fa-utensils"></i> Burger Menu</h2>
+            <div id="foodContainer" class="food-grid"></div>
+            <button onclick="backToBurgerRestaurants()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <!-- ========== PIZZA ========== -->
+        <section id="pizzaRestaurants" style="display:none;" class="section-card">
+            <h2><i class="fas fa-pizza-slice"></i> Pizza Restaurants</h2>
+            <div class="restaurant-list">
+                <div class="restaurant-card" onclick="openPizzaMenu('pizza_hut')">
+                    <h3>Pizza Hut</h3>
+                    <img src="Images/pizza_hut.jpg" alt="Pizza Hut">
+                </div>
+                <div class="restaurant-card" onclick="openPizzaMenu('pasta_pizza')">
+                    <h3>Pasta Pizza</h3>
+                    <img src="Images/pasta_pizza.jpg" alt="Pasta Pizza">
+                </div>
+                <div class="restaurant-card" onclick="openPizzaMenu('pizza_hayyat')">
+                    <h3>Pizza Hayyat</h3>
+                    <img src="https://i.pinimg.com/1200x/c7/d1/c5/c7d1c54b18c44185efdcef3ebd5e15d3.jpg" alt="Pizza Hut">
+                </div>
+                <div class="restaurant-card" onclick="openPizzaMenu('house_pizza')">
+                    <h3>Pizza House</h3>
+                    <img src="https://i.pinimg.com/736x/2a/55/38/2a5538f37aeb2f2cc0cad3bf30e7419a.jpg" alt="Pasta Pizza">
+                </div>
+            </div>
+            <button onclick="backToMain()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <section id="pizzaFoodList" style="display:none;" class="section-card">
+            <h2>🍕 Pizza Menu</h2>
+            <div id="pizzaFoodContainer" class="food-grid"></div>
+            <button onclick="backToPizzaRestaurants()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <!-- ========== ICE CREAM ========== -->
+        <section id="icecreamRestaurants" style="display:none;" class="section-card">
+            <h2><i class="fas fa-ice-cream"></i> Ice Cream Restaurants</h2>
+            <div class="restaurant-list">
+                <div class="restaurant-card" onclick="openIcecreamMenu('Rainbow_ice_cream')">
+                    <h3>Rainbow Ice Cream</h3>
+                    <img src="Images/rainbow_ice_cream.jpg" alt="Rainbow">
+                </div>
+                <div class="restaurant-card" onclick="openIcecreamMenu('Ice_cream')">
+                    <h3>Baby Ice Cream</h3>
+                    <img src="Images/ice_cream.jpg" alt="Ice cream">
+                </div>
+                <div class="restaurant-card" onclick="openIcecreamMenu('Yummy_ice_cream')">
+                    <h3> Yummy Ice Cream </h3>
+                    <img src="https://i.pinimg.com/1200x/91/88/2f/91882fef40d19c307fff009d44c81146.jpg" alt="Rainbow">
+                </div>
+                <div class="restaurant-card" onclick="openIcecreamMenu('Fradel_ice_cream')">
+                    <h3>Fradel Ice Cream</h3>
+                    <img src="https://i.pinimg.com/736x/c8/bc/fc/c8bcfcc8a7a86c7f8ddd9fa001c38726.jpg" alt="Ice cream">
+                </div>
+            </div>
+            <button onclick="backToMainIceCream()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <section id="icecreamFoodList" style="display:none;" class="section-card">
+            <h2>🍦 Ice Cream Menu</h2>
+            <div id="icecreamFoodContainer" class="food-grid"></div>
+            <button onclick="backToIceCreamRestaurants()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <!-- ========== COFFEE ========== -->
+        <section id="coffeeRestaurants" style="display:none;" class="section-card">
+            <h2><i class="fas fa-mug-hot"></i> Coffee Restaurants</h2>
+            <div class="restaurant-list">
+                <div class="restaurant-card" onclick="openCoffeeMenu('starbuck_coffee')">
+                    <h3>Starbuck Coffee</h3>
+                    <img src="Images/starbucks_coffee.jpg" alt="Starbucks">
+                </div>
+                <div class="restaurant-card" onclick="openCoffeeMenu('tube_coffee')">
+                    <h3>Tube Coffee</h3>
+                    <img src="Images/tube_coffee.jpg" alt="Tube Coffee">
+                </div>
+                <div class="restaurant-card" onclick="openCoffeeMenu('brown_coffee')">
+                    <h3>Brown Coffee</h3>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDUeYPXDhQWVHu4kgdIiege1fjKuCn61UJkA&s" alt="Brown">
+                </div>
+                <div class="restaurant-card" onclick="openCoffeeMenu('KOl_coffee')">
+                    <h3>KOL Coffee</h3>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEtwjy1-fjaydh8qgYZ0uMiAJTN7ktw4-jvw&s" alt="KOl Coffee">
+                </div>
+            </div>
+            <button onclick="backToMainCoffee()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <section id="coffeeFoodList" style="display:none;" class="section-card">
+            <h2>☕ Coffee Menu</h2>
+            <div id="coffeeFoodContainer" class="food-grid"></div>
+            <button onclick="backToCoffeeRestaurants()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <!-- ========== SEAFOOD ========== -->
+        <section id="seafoodRestaurants" style="display:none;" class="section-card">
+            <h2><i class="fas fa-fish"></i> Seafood Restaurants</h2>
+            <div class="restaurant-list">
+                <div class="restaurant-card" onclick="openSeafoodMenu('seafoods_home')">
+                    <h3>Seafoods Home</h3>
+                    <img src="Images/seafoods_home.jpg" alt="Seafood home">
+                </div>
+                <div class="restaurant-card" onclick="openSeafoodMenu('fresh_seafoods')">
+                    <h3>Fresh Seafoods</h3>
+                    <img src="Images/fresh_seafoods.jpg" alt="Fresh seafood">
+                </div>
+                 <div class="restaurant-card" onclick="openSeafoodMenu('Sonora_seafoods')">
+                    <h3>Sonoraa Home</h3>
+                    <img src="https://i.pinimg.com/736x/85/ff/6c/85ff6ca7973458eb30fa7a289c54419d.jpg" alt="Seafood Sonora">
+                </div>
+                <div class="restaurant-card" onclick="openSeafoodMenu('mommy_seafoods')">
+                    <h3>Mommy Seafoods</h3>
+                    <img src="https://cdn.redbox.menu/cache-prod/61a661a5-8621-481b-95f3-427ab6cc0d32__xl.jpg" alt="Fresh seafood">
+                </div>
+            </div>
+            <button onclick="backToMainSeafood()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <section id="seafoodFoodList" style="display:none;" class="section-card">
+            <h2>🦐 Seafood Menu</h2>
+            <div id="seafoodFoodContainer" class="food-grid"></div>
+            <button onclick="backToSeafoodRestaurants()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <!-- ========== HEALTHY ========== -->
+        <section id="healthyRestaurants" style="display:none;" class="section-card">
+            <h2><i class="fas fa-leaf"></i> Healthy Restaurants</h2>
+            <div class="restaurant-list">
+                <div class="restaurant-card" onclick="openHealthyMenu('healthy_home')">
+                    <h3>Healthy Foods</h3>
+                    <img src="https://i.pinimg.com/736x/55/81/86/558186dee5bd6012136fe1a4caf6af2d.jpg" alt="Healthy bowl">
+                </div>
+                <div class="restaurant-card" onclick="openHealthyMenu('salad_fresh')">
+                    <h3>Salad Fresh</h3>
+                    <img src="https://i.pinimg.com/736x/fc/a4/85/fca48567ec6ebcc4367b8ab1ff73d291.jpg" alt="Salad">
+                </div>
+                <div class="restaurant-card" onclick="openHealthyMenu('home_salad')">
+                    <h3>Home salad</h3>
+                    <img src="https://i.pinimg.com/736x/cb/a6/88/cba688058baffbf0b48c562ab7444a92.jpg" alt="Healthy bowl">
+                </div>
+                <div class="restaurant-card" onclick="openHealthyMenu('green_home')">
+                    <h3> Green Salad </h3>
+                    <img src="https://i.pinimg.com/1200x/17/de/17/17de17fa8735675f348ef86aeafd095f.jpg" alt="Salad">
+                </div>
+            </div>
+            <button onclick="backToMainHealthy()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        <section id="healthyFoodList" style="display:none;" class="section-card">
+            <h2>🥗 Healthy Menu</h2>
+            <div id="healthyFoodContainer" class="food-grid"></div>
+            <button onclick="backToHealthyRestaurants()"><i class="fas fa-arrow-left"></i> Back</button>
+        </section>
+
+        
+
+        <!-- WALLET SECTION (exactly as in the image) -->
+        <section id="walletSection" style="display:none;" class="wallet-page">
+            <h2>My Wallet</h2>
+            <div class="wallet-container">
+                <div class="balance-card">
+                    <h3>Current Balance</h3>
+                    <div class="amount" id="walletBalance">$245.75</div>
+                    <div class="btn-group">
+                        <button class="btn" onclick="showAddMoneyForm()">Add Money</button>
+                        <button class="btn btn-outline" onclick="withdrawMoney()">Withdraw</button>
+                    </div>
+                </div>
+
+                <!-- Add Money Form (Initially Hidden) -->
+                <div id="add-money-form" class="add-money-form" style="display: none;">
+                    <h4>Add Money to Wallet</h4>
+                    <div class="amount-options">
+                        <button class="amount-btn" onclick="selectAmount(10, event)">$10</button>
+                        <button class="amount-btn" onclick="selectAmount(20, event)">$20</button>
+                        <button class="amount-btn" onclick="selectAmount(50, event)">$50</button>
+                        <button class="amount-btn" onclick="selectAmount(100, event)">$100</button>
+                    </div>
+                    <div class="custom-amount">
+                        <label>Custom Amount:</label>
+                        <input type="number" id="custom-amount" placeholder="Enter amount" min="1" max="1000">
+                    </div>
+                    <div class="payment-methods">
+                        <h5>Payment Method</h5>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="card" checked>
+                            Credit/Debit Card
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="paypal">
+                            PayPal
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="bank">
+                            Bank Transfer
+                        </label>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="cancel-btn" onclick="hideAddMoneyForm()">Cancel</button>
+                        <button class="confirm-btn" onclick="addMoneyToWallet()">Add Money</button>
+                    </div>
+                </div>
+
+                <div class="transaction-history">
+                    <h3>Recent Transactions</h3>
+                    <div class="transaction-item">
+                        <div class="transaction-details">
+                            <h4>Food Order - Pizza Hut</h4>
+                            <p>June 15, 2023</p>
+                        </div>
+                        <div class="transaction-amount negative">-$24.50</div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-details">
+                            <h4>Refund - Cancelled Order</h4>
+                            <p>June 12, 2023</p>
+                        </div>
+                        <div class="transaction-amount positive">+$18.75</div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-details">
+                            <h4>Food Order - Burger King</h4>
+                            <p>June 10, 2023</p>
+                        </div>
+                        <div class="transaction-amount negative">-$15.30</div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-details">
+                            <h4>Wallet Top-up</h4>
+                            <p>June 5, 2023</p>
+                        </div>
+                        <div class="transaction-amount positive">+$100.00</div>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-details">
+                            <h4>Food Order - Sushi Place</h4>
+                            <p>June 1, 2023</p>
+                        </div>
+                        <div class="transaction-amount negative">-$32.45</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- ========== NOTIFICATION SECTION ========== -->
+        
+    <section id="notificationSection" style="display:none;" class="notification-page">
+        <h2 class="section-title">Notifications</h2>
+        <div class="notification-container">
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-percent"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Special Offer!</h4>
+                    <p>Get 20% off on all pizza orders today. Limited time offer!</p>
+                    <div class="notification-time">2 hours ago</div>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Order Delivered</h4>
+                    <p>Your order #12345 has been successfully delivered.</p>
+                    <div class="notification-time">Yesterday</div>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>New Restaurant Added</h4>
+                    <p>"Taste of Italy" is now available in your area.</p>
+                    <div class="notification-time">2 days ago</div>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>Birthday Special</h4>
+                    <p>Celebrate your birthday with us and get a free dessert!</p>
+                    <div class="notification-time">3 days ago</div>
+                </div>
+            </div>
+            <div class="notification-item">
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="notification-content">
+                    <h4>App Update</h4>
+                    <p>New features available in the latest version of FOODIE.</p>
+                    <div class="notification-time">1 week ago</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== CONTACT US SECTION ========== -->
+    <section id="contactSection" style="display:none;" class="contact-page">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p>Have questions or feedback? We'd love to hear from you.</p>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Address</h4>
+                        <p>Tuak thla , khen Sen Sok, Phnom Penh, Cambodia</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Phone</h4>
+                        <p>+ (855) 97 527 3795</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p>rothsupport@foodieapp.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Working Hours</h4>
+                        <p>Monday - Friday: 9:00 AM - 10:00 PM</p>
+                        <p>Weekend: 10:00 AM - 11:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Send us a Message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-block">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- ========== SETTINGS SECTION ========== -->
+    <section id="settingsSection" style="display:none;" class="settings-page">
+        <h2 class="section-title">Settings</h2>
+        <div class="settings-container">
+            <div class="settings-section">
+                <h3>Account Settings</h3>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Edit Profile</h4>
+                        <p>Update your personal information</p>
+                    </div>
+                    <button class="btn" onclick="editProfile()">Edit</button>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Change Password</h4>
+                        <p>Update your login password</p>
+                    </div>
+                    <button class="btn" onclick="changePassword()">Change</button>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Payment Methods</h4>
+                        <p>Manage your payment options</p>
+                    </div>
+                    <button class="btn" onclick="managePayment()">Manage</button>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Notification Settings</h3>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Push Notifications</h4>
+                        <p>Receive alerts about new offers and orders</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Email Notifications</h4>
+                        <p>Get updates via email</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>SMS Notifications</h4>
+                        <p>Receive text messages about your orders</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h3>App Preferences</h3>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Language</h4>
+                        <p id="languageDisplay">English (US)</p>
+                    </div>
+                    <button class="btn" onclick="changeLanguage()">Change</button>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h4>Currency</h4>
+                        <p id="currencyDisplay">US Dollar ($)</p>
+                    </div>
+                    <button class="btn" onclick="changeCurrency()">Change</button>
+                </div>
+            </div>
+            
+        </div>
+    </section> 
+    
+    </main>
+</div>
+
+<!-- Ion Icons (optional, if needed) -->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-- External JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
